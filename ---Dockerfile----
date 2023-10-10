@@ -1,0 +1,11 @@
+FROM tomcat
+# 外部文件添加到 docker container 环境中（ 用完后可手动删除
+ADD ./dist dist
+# CMD [ "" ]
+RUN mkdir -p ./webapps/ROOT
+RUN cp -r ./dist/* ./webapps/ROOT
+# startup.sh 启动可能有问题
+# CMD [ "./bin/startup.sh" , "run"]
+# CMD [ "./bin/catalina.sh" , "run"]
+ENTRYPOINT [ "./bin/catalina.sh" , "run" ]
+# COPY  ./dist/* ./webapps/ROOT
